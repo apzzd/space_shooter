@@ -20,6 +20,10 @@ class CanvasRenderer {
 				if (child.pos) {
 					ctx.translate(Math.round(child.pos.x), Math.round(child.pos.y));
 				}
+
+				if (child.scale) {
+					ctx.scale(child.scale.x, child.scale.y)
+				}
 				
 				if (child.text) {
 					// Text Objects
@@ -31,12 +35,13 @@ class CanvasRenderer {
 
 				} else if (child.texture) {
 					// Sprite Objects
-					child.size = child.size || 1
-					const dx = child.size * child.texture.img.width
-					const dy = child.size * child.texture.img.height
-					const offsetx = child.grows ? - dx / 2 : 0;
-					const offsety = child.grows ? - dy / 2 : 0;
-					ctx.drawImage(child.texture.img, offsetx, offsety, dx, dy);
+					// child.size = child.size || 1
+					// const dx = child.size * child.texture.img.width
+					// const dy = child.size * child.texture.img.height
+					// const offsetx = child.grows ? - dx / 2 : 0;
+					// const offsety = child.grows ? - dy / 2 : 0;
+					// ctx.drawImage(child.texture.img, offsetx, offsety, dx, dy);
+					ctx.drawImage(child.texture.img, 0, 0);
 				}
 
 				if (child.children) {

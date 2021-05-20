@@ -24,6 +24,10 @@ class Container {
 		
 		/// update container code here
 	}
+
+	map(f) {
+		return this.children.map
+	}
 }
 
 export default Container;
