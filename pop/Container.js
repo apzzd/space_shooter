@@ -26,7 +26,7 @@ class Container {
 	}
 
 	map(f) {
-		return this.children.map
+		return this.children.map(f)
 	}
 }
 
