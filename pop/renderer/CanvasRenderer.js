@@ -23,6 +23,13 @@ class CanvasRenderer {
 
 				if (child.scale) {
 					ctx.scale(child.scale.x, child.scale.y);
+					child.scale.x = Math.abs(child.scale.x) * (child.flipped ? -1 : 1)
+				}
+
+
+				if (child.anchor) {
+					ctx.translate(child.anchor.x, child.anchor.y)
+					child.anchor.x = (child.flipped ? -32 : 0)
 				}
 				
 				if (child.text) {
@@ -43,8 +50,11 @@ class CanvasRenderer {
 					// ctx.drawImage(child.texture.img, offsetx, offsety, dx, dy);
 					ctx.drawImage(child.texture.img, 0, 0);
 				}
+					
+				
 
 				if (child.children) {
+					
 					renderRec(child);
 				}
 				ctx.restore();

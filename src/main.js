@@ -28,6 +28,9 @@ ship.update = function(dt, t) {
 	pos.x += controls.x * dt * 200;
 	pos.y += controls.y * dt * 200;
 
+	if (controls.x > 0) ship.flipped = false
+	if (controls.x < 0) ship.flipped = true
+
 	if (pos.x < 0) pos.x = 0;
 	if (pos.x > w) pos.x = w;
 	if (pos.y < 0) pos.y = 0;
