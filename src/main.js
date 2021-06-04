@@ -2,7 +2,7 @@ import pop from "../pop/index.js"
 import math from "../utils/math.js"
 import KeyControl from "../pop/controls/KeyControls.js"
 
-const { Game, Sprite, Texture, Container } = pop
+const { Game, Sprite, Texture, Container, Text } = pop
 
 const game = new Game(640, 320)
 const { scene, w, h } = game
@@ -13,7 +13,7 @@ const textures = {
 	background: new Texture("res/bg-2.png"),
 	spaceship: new Texture("res/alien.png"),
 	bullet: new Texture("res/bullet.png"),
-	baddie: new Texture("res/baddie.png"),
+	baddie: new Texture("res/spaceship-flipped.png"),
 	explo: new Texture("res/explosion.png"),
     building: new Texture("res/building.png")
 }
@@ -71,25 +71,91 @@ function spawnBaddie(x, y, speed, t) {
 	baddies.add(baddie);
 }
 
+let gameOver = false;
+
+function doGameOver() {
+	const gameOverMsg = new Text("~Game Over~", {
+		font: "30pt sans-serif",
+		fill: "red",
+		align: "center"
+	})
+
+	gameOverMsg.pos.x = w / 2;
+	gameOverMsg.pos.y = 120;
+
+	scene.add(gameOverMsg);
+	scene.remove(ship);
+	gameOver = true;
+}
+
+
 let lastSpawn = 0;
-let spawnSpeed = 2.5;
+let spawnSpeed = 6.0;
 scene.add(baddies);
 
 
+const score = new Text("score:", {
+	font: "20px sans-serif",
+	fill: "#8B8994",
+	align: "center"
+})
+
+score.pos.x = w / 2;
+score.pos.y = h - 30;
+scene.add(score);
+var scoreAmnt = 0
+
+
+
+
 game.run((dt, t) => {
+
+
     buildings.map(b => {
         b.pos.x -= 100 * dt
         if (b.pos.x < -80) {
             makeRandom(b, w)
         }
 
-        if (t - lastSpawn > spawnSpeed) {
-            lastSpawn = t;
-            const speed = -250 - (Math.random() * Math.random() * 100);
-            const position = Math.random() * (h - 24);
-            spawnBaddie(w, position, speed, t);
-    
-            spawnSpeed = spawnSpeed < 0.05 ? 0.6 : spawnSpeed * 0.97 + 0.001;
-        }
     })
+
+    baddies.children.forEach(baddie => {
+
+        if (baddie.pos.y > h || baddie.pos.y < 0) {
+            baddie.vy = -baddie.vy;
+        }
+
+        if (t - baddie.lastChangeY > 0.3) {
+            baddie.lastChangeY = t;
+            baddie.vy = -100 + (Math.random()*200);
+        } 
+
+
+        const dx = baddie.pos.x + 16 - (ship.pos.x + 8);
+		const dy = baddie.pos.y + 16 - (ship.pos.y + 10);
+		if (Math.sqrt(dx*dx + dy*dy) < 24) {
+			// collision!
+			baddie.dead = true;
+			ship.dead = true;
+            doGameOver()
+
+        }
+        if (!ship.dead){
+            scoreAmnt += 0.01
+        }
+
+    })
+
+
+    if (t - lastSpawn > spawnSpeed) {
+        lastSpawn = t;
+        const speed = -250 - (Math.random() * Math.random() * 100);
+        const position = Math.random() * (h - 24);
+        spawnBaddie(w, position, speed, t);
+
+        spawnSpeed = spawnSpeed < 0.05 ? 0.6 : spawnSpeed * 0.8 + 0.001;
+    }
+
+    score.text = "score: " + String(Math.floor(scoreAmnt))
+
 })
