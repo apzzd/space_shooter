@@ -47,6 +47,7 @@ class CanvasRenderer {
 							img,
 							child.frame.x * child.tileW,
 							child.frame.y * child.tileH,
+							child.tileW, child.tileH,
 							0, 0,
 							child.tileW, child.tileH
 						)
