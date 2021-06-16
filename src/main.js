@@ -32,7 +32,7 @@ ship.update = function(dt, t) {
 	if (controls.x < 0) ship.flipped = true
 
 	if (pos.x < 0) pos.x = 0;
-	if (pos.x > w) pos.x = w;
+	if (pos.x > w-30) pos.x = w-30;
 	if (pos.y < 0) pos.y = 0;
 	if (pos.y > (h-40)) pos.y = h - 40;
 	// scale.x = Math.abs(Math.sin(10.5 * t)) + 1;
