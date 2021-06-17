@@ -16,6 +16,12 @@ function randOneIn(max = 2) {
 	return rand(0, max) === 0;
 }
 
+function distance (a, b) {
+	const dx = a.x - b.x
+	const dy = a.y - b.y
+	return Math.sqrt(dx * dx + dy * dy)
+}
+
 function randOneFrom(items) {
 	return items[rand(items.length)];
 }
@@ -24,5 +30,6 @@ export default {
 	rand,
 	randf,
 	randOneIn,
-	randOneFrom
+	randOneFrom,
+	distance
 }
