@@ -6,10 +6,9 @@ import Text from './Text.js';
 import Texture from './Texture.js';
 import Sprite from './Sprite.js';
 import Game from './Game.js';
-import TileSprite from './TileSprite.js'
+import TileSprite from './TileSprite.js';
 import TileMap from './Tilemap.js';
-import math from '../utils/math.js'
-import Level from "./Level.js"
+import math from '../utils/math.js';
 
 export default {
 	Container,
@@ -22,6 +21,5 @@ export default {
 	TileSprite,
 	Game, 
 	TileMap,
-	math,
-	Level
+	math
 }
