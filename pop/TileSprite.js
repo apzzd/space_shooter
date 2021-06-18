@@ -5,11 +5,14 @@ class TileSprite extends Sprite {
     constructor (texture, w, h) {
         super(texture)
         this.tileW = w 
-        this.anims = new AnimManager(this)
         this.tileH = h
         this.frame = {x:0, y:0}  
+        this.anims = new AnimManager(this)
     }
     
+    update(dt, t) {
+        this.anims.update(dt, t)
+    }
 }
 
 export default TileSprite

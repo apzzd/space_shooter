@@ -7,6 +7,9 @@ import Texture from './Texture.js';
 import Sprite from './Sprite.js';
 import Game from './Game.js';
 import TileSprite from './TileSprite.js'
+import TileMap from './Tilemap.js';
+import math from '../utils/math.js'
+import Level from "./Level.js"
 
 export default {
 	Container,
@@ -17,5 +20,8 @@ export default {
 	Texture,
 	Sprite,
 	TileSprite,
-	Game
+	Game, 
+	TileMap,
+	math,
+	Level
 }
