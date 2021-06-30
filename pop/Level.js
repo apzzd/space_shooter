@@ -11,6 +11,7 @@ class Level extends TileMap {
         const mapH = Math.floor(h/tileSize)
         const level = []
         let tileval
+
         for (let y = 0; y < mapH; y++) {
             for (let x = 0; x < mapW ; x++) {
                 if (x == 0  || x == mapW - 1) {
@@ -21,11 +22,26 @@ class Level extends TileMap {
                     tileval = { x: 2, y: 1 }
                 } else {
                     tileval = { x: math.rand(1, 4), y: 0 }
+                    if (math.randOneIn(5)) {
+                        tileval = { x: 1, y: 1}
+                    }
                 }
                 
                 level.push(tileval)
             }
         }
+
+        // let rand
+        // for (let y = 0; y < mapH; y++) {
+        //     for (let x = 0; x < mapW ; x++) {
+        //         rand = math.randOneIn(50)
+        //         if (rand == 1) {
+        //             level.push({x: 1, y: 1})
+        //         }
+        //     }
+        // }
+
+
         super (level, mapW, mapH, tileSize, tileSize, texture)
         this.blank = {x: 0, y: 0}
         this.lastTile = null 

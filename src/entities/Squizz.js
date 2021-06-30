@@ -1,4 +1,5 @@
 import pop from "../../pop/index.js"
+import TileMap from "../../pop/Tilemap.js"
 import math from "../../utils/math.js"
 
 const  {TileSprite, Texture} = pop
@@ -40,7 +41,7 @@ class Squizz extends TileSprite {
                 dir.x = 0
                 pos.x = Math.round(pos.x / 32) * 32
             }
-        }  
+        } 
         pos.x += dir.x * dt * (32/speed)
         pos.y += dir.y * dt * (32/speed)
 
