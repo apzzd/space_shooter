@@ -9,6 +9,8 @@ import Game from './Game.js';
 import TileSprite from './TileSprite.js';
 import TileMap from './Tilemap.js';
 import math from '../utils/math.js';
+import entity from "../utils/entity.js"
+import Camera from "../pop/Camera.js"
 
 export default {
 	Container,
@@ -21,5 +23,7 @@ export default {
 	TileSprite,
 	Game, 
 	TileMap,
-	math
+	math,
+	entity,
+	Camera
 }

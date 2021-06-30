@@ -16,6 +16,10 @@ function randOneIn(max = 2) {
 	return rand(0, max) === 0;
 }
 
+function clamp(x, min, max) {
+	return Math.max(min, Math.min(x, max))
+}
+
 function distance (a, b) {
 	const dx = a.x - b.x
 	const dy = a.y - b.y
@@ -31,5 +35,6 @@ export default {
 	randf,
 	randOneIn,
 	randOneFrom,
-	distance
+	distance,
+	clamp
 }

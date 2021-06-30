@@ -2,6 +2,7 @@ class Anim {
     constructor(frames, rate) {
         this.frames = frames
         this.rate = rate
+        console.log(rate)
         this.reset()
     }
 
