@@ -4,8 +4,35 @@ import KeyControl from '../pop/controls/KeyControls.js';
 import pop from '../pop/index.js';
 import Level from '../pop/Level.js';
 import Squizz from "./entities/Squizz.js"
+import Baddie from "./entities/Baddie.js"
 
 const { Game, Sprite, Texture, Container, MouseControl, TileMap, math, entity } = pop;
+
+function addBaddies(level) {
+    const baddies = new Container()
+    for (let i = 0; i < 5; i++) {
+        const b = baddies.add(new Baddie(32*5, 0))
+        b.pos.y = Math.floor(level.h/5) * i + level.tileH
+    }
+    for (let i = 0; i < 10; i++) {
+        const b = baddies.add(new Baddie(0, 32*5))
+        b.pos.x = Math.floor(level.w/10) * i + level.tileW
+    }
+    return baddies
+}
+
+function updateBaddies() {
+
+    this.baddies.map(b => {
+        const {pos} = b
+        if (entity.distance(squizz, b) < 32) {
+            
+        }
+    })
+
+
+}
+
 
 
 
@@ -22,14 +49,17 @@ const texture = new Texture("res/tiles.png")
 const controls = new KeyControl()
 const level = new Level(w * 2, h * 2)
 const squizz = new Squizz(controls)
+const baddies = addBaddies(level)
 const camera = new Camera(
     squizz,
     {w, h},
     {w: level.w, h: level.h})
 
+console.log
 scene.add(camera)
 camera.add(level)
 camera.add(squizz)
+camera.add(baddies)
 
 console.log(squizz)
 

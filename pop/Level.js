@@ -22,9 +22,6 @@ class Level extends TileMap {
                     tileval = { x: 2, y: 1 }
                 } else {
                     tileval = { x: math.rand(1, 4), y: 0 }
-                    if (math.randOneIn(5)) {
-                        tileval = { x: 1, y: 1}
-                    }
                 }
                 
                 level.push(tileval)
