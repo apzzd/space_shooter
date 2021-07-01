@@ -10,11 +10,11 @@ const { Game, Sprite, Texture, Container, MouseControl, TileMap, math, entity } 
 
 function addBaddies(level) {
     const baddies = new Container()
-    for (let i = 0; i < 5; i++) {
+    for (let i = 1; i < 3; i++) {
         const b = baddies.add(new Baddie(32*5, 0))
         b.pos.y = Math.floor(level.h/5) * i + level.tileH
     }
-    for (let i = 0; i < 10; i++) {
+    for (let i = 1; i < 6; i++) {
         const b = baddies.add(new Baddie(0, 32*5))
         b.pos.x = Math.floor(level.w/10) * i + level.tileW
     }
@@ -22,15 +22,16 @@ function addBaddies(level) {
 }
 
 function updateBaddies() {
-
-    this.baddies.map(b => {
+    baddies.map(b => {
         const {pos} = b
         if (entity.distance(squizz, b) < 32) {
-            
+            squizz.dead = true
+            if (b.xSpeed) pos.x = -level.w
+            else pos.y = -level.h
         }
+        if (pos.x > level.w) pos.x = -32
+        if (pos.y > level.h) pos.y = -32
     })
-
-
 }
 
 
@@ -69,6 +70,7 @@ game.run(() => {
     pos.x = math.clamp(pos.x, left, right)
     pos.y = math.clamp(pos.y, top, bottom)
     const ground = level.checkGround(entity.center(squizz))
+    updateBaddies()
 })
 
 game.run()

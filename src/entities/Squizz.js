@@ -15,7 +15,7 @@ class Squizz extends TileSprite {
         anims.add("walk", [0, 1, 2, 3].map(x=>({x, y: 0})), 0.15)
         anims.add("idle", [{x: 0, y:0}, {x: 4, y: 0}, {x: 4, y: 1}, {x:4, y:0}], 0.4)
         
-        anims.play("idle")
+        anims.play("walk")
 
         this.speed = 0.15
         this.dir = {
