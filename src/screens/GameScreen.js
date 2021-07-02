@@ -36,12 +36,17 @@ class GameScreen extends Container {
         console.log("lev",level)
         const baddies = new Container()
         for (let i = 1; i < 5; i++) {
-            const b = baddies.add(new Baddie(32*5, 0))
+            const b = baddies.add(new Baddie(32*10, 0))
             b.pos.y = Math.floor(level.h/5) * i + level.tileH
         }
         for (let i = 1; i < 10; i++) {
-            const b = baddies.add(new Baddie(0, 32*5))
+            const b = baddies.add(new Baddie(0, 32*10))
             b.pos.x = Math.floor(level.w/10) * i + level.tileW
+        }
+        for (let i = 1; i < 10; i++) {
+            const b = baddies.add(new Baddie(32*5, 32*5))
+            b.pos.x = Math.floor(level.w/10) * i + level.tileW
+            b.pos.y = Math.floor(level.h/10) * i + level.tileH
         }
         return baddies
     }
@@ -49,7 +54,7 @@ class GameScreen extends Container {
         const { squizz, level } = this
         this.baddies.map(b => {
             const {pos} = b
-            if (entity.distance(squizz, b) < 32) {
+            if (entity.distance(squizz, b) < 32 && !squizz.dead) {
                 squizz.dead = true
                 if (b.xSpeed) pos.x = -level.w
                 else pos.y = -level.h

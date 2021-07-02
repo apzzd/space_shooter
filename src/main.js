@@ -1,9 +1,9 @@
 import KeyControl from '../pop/controls/KeyControls.js';
 import pop from '../pop/index.js';
-import LogoScreen from "./screens/LogoScreen.js"
-import TitleScreen from "./screens/TitleScreen.js"
+// import LogoScreen from "./screens/LogoScreen.js"
+// import TitleScreen from "./screens/TitleScreen.js"
 import GameScreen from "./screens/GameScreen.js"
-import GameOverScreen from "./screens/GameOverScreen.js"
+// import GameOverScreen from "./screens/GameOverScreen.js"
 
 const { Game } = pop;
 
@@ -24,4 +24,8 @@ function newGame() {
     game.scene = new GameScreen(game, controls, gameOverScreen)
 }
 
-game.scene = new LogoScreen(game, titleScreen)
+// game.scene = new LogoScreen(game, titleScreen)
+
+newGame()
+
+game.run()
