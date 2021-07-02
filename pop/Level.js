@@ -48,16 +48,24 @@ class Level extends TileMap {
             top: tileSize,
             bottom: h - tileSize * 2
         }
+        this.special = {x: math.rand(1, 50), y: math.rand(1,  50)}
     }
     checkGround(pos) {
-        const { blank, lastTile } = this
+        const { blank, lastTile, special} = this
         const tile = this.tileAtPixelPos(pos)
         if (lastTile === tile) {
             return "checked"
         }
         this.lastTile = tile
         if (this.frame !== blank) {
-            this.setFrameAtPixelPos(pos, {x: 0, y: math.rand(0, 2)})
+            let converted = this.pixelToMapPos(pos)
+            if ( converted.x === special.x && converted.y === special.y) {
+                alert("we have a winner") 
+                this.setFrameAtPixelPos(pos, {x: 4, y: 1})
+            } else {
+                this.setFrameAtPixelPos(pos, {x: 0, y: math.rand(0, 2)})
+            }
+            
             return "solid"
         }
         return "cleared"
