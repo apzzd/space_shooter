@@ -20,6 +20,17 @@ class CanvasRenderer {
 				if (child.pos) {
 					ctx.translate(Math.round(child.pos.x), Math.round(child.pos.y));
 				}
+
+				if (child.scale) {
+					ctx.scale(child.scale.x, child.scale.y);
+					child.scale.x = Math.abs(child.scale.x) * (child.flipped ? -1 : 1)
+				}
+
+
+				if (child.anchor) {
+					ctx.translate(child.anchor.x, child.anchor.y)
+					child.anchor.x = (child.flipped ? -32 : 0)
+				}
 				
 				if (child.text) {
 					// Text Objects
@@ -30,16 +41,25 @@ class CanvasRenderer {
 					ctx.fillText(child.text, 0, 0);
 
 				} else if (child.texture) {
-					// Sprite Objects
-					child.size = child.size || 1
-					const dx = child.size * child.texture.img.width
-					const dy = child.size * child.texture.img.height
-					const offsetx = child.grows ? - dx / 2 : 0;
-					const offsety = child.grows ? - dy / 2 : 0;
-					ctx.drawImage(child.texture.img, offsetx, offsety, dx, dy);
+					const img = child.texture.img
+					if (child.tileW) {
+						ctx.drawImage(
+							img,
+							child.frame.x * child.tileW,
+							child.frame.y * child.tileH,
+							child.tileW, child.tileH,
+							0, 0,
+							child.tileW, child.tileH
+						)
+					} else {
+						ctx.drawImage(img, 0, 0)
+					}
 				}
+					
+				
 
 				if (child.children) {
+					
 					renderRec(child);
 				}
 				ctx.restore();
